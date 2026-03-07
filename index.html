@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PlantScan — Know Your Plants. Watch Them Grow.</title>
+  <meta name="description" content="AI-powered plant identification, growth tracking, and care streaks."/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" onclick="return showView('landing')">
+        <div class="nav-logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C6 2 3 8 3 14c0 4.4 3.6 8 9 8 2 0 4.5-.8 6-3 .8-1.2 1-2.5 1-4C19 8 16 2 12 2z" fill="#4a9b6f"/>
+            <path d="M12 22 Q10 15 14 9" stroke="white" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <span>PlantScan</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#" class="nav-link" onclick="return showView('dashboard')" id="navDashboard" style="display:none">Dashboard</a>
+        <a href="#" class="nav-link" onclick="return showView('scan')" id="navScan" style="display:none">Scan Plant</a>
+      </div>
+      <div class="nav-actions">
+        <div id="navGuest" class="nav-guest">
+          <a href="#" class="btn-ghost-sm" onclick="return showView('login')">Sign in</a>
+          <a href="#" class="btn-primary-sm" onclick="return showView('signup')">Get started</a>
+        </div>
+        <div id="navAuth" class="nav-auth" style="display:none">
+          <div class="nav-avatar" id="navAvatar">U</div>
+          <button class="btn-ghost-sm" onclick="logout()">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════ VIEW: LANDING ═══════════ -->
+  <div id="view-landing" class="view active">
+    <section class="hero">
+      <div class="hero-bg">
+        <div class="hero-orb orb1"></div>
+        <div class="hero-orb orb2"></div>
+        <div class="hero-orb orb3"></div>
+      </div>
+      <div class="hero-inner">
+        <div class="hero-eyebrow reveal">
+          <span class="eyebrow-dot"></span>AI-Powered Plant Care
+        </div>
+        <h1 class="hero-title reveal" style="--d:.08s">
+          Know your plants.<br><em>Watch them grow.</em>
+        </h1>
+        <p class="hero-subtitle reveal" style="--d:.16s">
+          Identify any plant instantly with AI, log daily growth, build care streaks,
+          and share your botanical journey — all in one elegant app.
+        </p>
+        <div class="hero-actions reveal" style="--d:.24s">
+          <button class="btn-primary btn-lg" onclick="showView('signup')">Start for free</button>
+          <button class="btn-outline btn-lg" onclick="showView('login')">Sign in →</button>
+        </div>
+        <div class="hero-proof reveal" style="--d:.32s">
+          <div class="proof-item"><span>📸</span>Snap &amp; Identify</div>
+          <div class="proof-sep"></div>
+          <div class="proof-item"><span>📈</span>Track Growth</div>
+          <div class="proof-sep"></div>
+          <div class="proof-item"><span>🔥</span>Build Streaks</div>
+        </div>
+      </div>
+      <div class="hero-floats">
+        <div class="float-card fc1 reveal" style="--d:.4s">
+          <div class="fc-plant-icon">🌿</div>
+          <div>
+            <div class="fc-name">Monstera deliciosa</div>
+            <div class="fc-conf">98% confidence</div>
+          </div>
+          <div class="fc-check">✓</div>
+        </div>
+        <div class="float-card fc2 reveal" style="--d:.5s">
+          <div class="fc-streak-num">🔥 14</div>
+          <div class="fc-streak-lbl">day streak</div>
+          <div class="fc-bar"><div class="fc-bar-fill" style="width:47%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="section-inner">
+        <div class="section-kicker">What PlantScan does</div>
+        <h2 class="section-heading">Everything your plants need</h2>
+        <div class="features-grid">
+          <div class="feature-card reveal" style="--d:0s"><div class="fi">📸</div><h3>Snap &amp; Identify</h3><p>Point your camera at any plant. Our AI identifies the species in seconds with confidence scores.</p></div>
+          <div class="feature-card reveal" style="--d:.06s"><div class="fi">📈</div><h3>Track Growth</h3><p>Log daily height and photos. Watch progress on a beautiful growth chart over time.</p></div>
+          <div class="feature-card reveal" style="--d:.12s"><div class="fi">📓</div><h3>Daily Logs</h3><p>A rich timeline of every observation — notes, photos, measurements — a true plant diary.</p></div>
+          <div class="feature-card reveal" style="--d:.18s"><div class="fi">🔥</div><h3>Care Streaks</h3><p>Log daily and keep your streak alive. Track milestones at 7, 14, 30, and 60 days.</p></div>
+          <div class="feature-card reveal" style="--d:.24s"><div class="fi">⏱️</div><h3>Growth Timeline</h3><p>A visual journal grouped by date. See exactly how far your plant has come since day one.</p></div>
+          <div class="feature-card reveal" style="--d:.30s"><div class="fi">🃏</div><h3>Share Progress</h3><p>Generate a beautiful shareable card with your plant's stats. Download as PNG or share a link.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="cta-inner">
+        <div class="cta-leaf-deco">🌱</div>
+        <h2>Start your plant journey today</h2>
+        <p>Free to use. No credit card required.</p>
+        <button class="btn-primary btn-lg" onclick="showView('signup')">Create your garden →</button>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span class="footer-logo">🌿 PlantScan</span>
+        <span>© 2025 PlantScan. Made with love for plants.</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ═══════════ VIEW: LOGIN ═══════════ -->
+  <div id="view-login" class="view">
+    <div class="auth-wrap">
+      <div class="auth-deco-col">
+        <div class="auth-deco-content">
+          <div class="auth-deco-glyph">🌿</div>
+          <h2>PlantScan</h2>
+          <p>Your personal plant growth journal. Identify, track, and celebrate your plants.</p>
+          <div class="auth-features">
+            <div class="af-item">📸 AI plant identification</div>
+            <div class="af-item">📈 Growth tracking &amp; charts</div>
+            <div class="af-item">🔥 Daily care streaks</div>
+          </div>
+        </div>
+      </div>
+      <div class="auth-form-col">
+        <div class="auth-form-box">
+          <h1>Welcome back</h1>
+          <p class="auth-switch">Don't have an account? <a href="#" onclick="return showView('signup')">Sign up</a></p>
+          <div id="loginError" class="form-error" style="display:none"></div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="loginEmail" placeholder="you@email.com" class="finput"/>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="loginPassword" placeholder="••••••••" class="finput"/>
+          </div>
+          <button class="btn-primary btn-full btn-lg" onclick="handleLogin()">
+            <span id="loginBtnText">Sign in</span>
+            <span id="loginSpinner" class="bspinner" style="display:none"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ VIEW: SIGNUP ═══════════ -->
+  <div id="view-signup" class="view">
+    <div class="auth-wrap">
+      <div class="auth-deco-col">
+        <div class="auth-deco-content">
+          <div class="auth-deco-glyph">🌱</div>
+          <h2>Join PlantScan</h2>
+          <p>Start tracking your plant collection today. It's completely free.</p>
+          <div class="auth-features">
+            <div class="af-item">🪴 Unlimited plants</div>
+            <div class="af-item">📓 Unlimited log entries</div>
+            <div class="af-item">🃏 Shareable progress cards</div>
+          </div>
+        </div>
+      </div>
+      <div class="auth-form-col">
+        <div class="auth-form-box">
+          <h1>Create account</h1>
+          <p class="auth-switch">Already have one? <a href="#" onclick="return showView('login')">Sign in</a></p>
+          <div id="signupError" class="form-error" style="display:none"></div>
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="signupUsername" placeholder="Your display name" class="finput"/>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="signupEmail" placeholder="you@email.com" class="finput"/>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="signupPassword" placeholder="At least 8 characters" class="finput"/>
+          </div>
+          <button class="btn-primary btn-full btn-lg" onclick="handleSignup()">
+            <span id="signupBtnText">Create account</span>
+            <span id="signupSpinner" class="bspinner" style="display:none"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ VIEW: DASHBOARD ═══════════ -->
+  <div id="view-dashboard" class="view">
+    <div class="page-wrap">
+      <div class="page-header">
+        <div>
+          <p class="page-kicker">Good day,</p>
+          <h1 class="page-h1" id="dashGreeting">Gardener 🌱</h1>
+        </div>
+        <button class="btn-primary" onclick="showView('scan')"><span>+</span> Scan Plant</button>
+      </div>
+      <div class="stats-row" id="statsRow">
+        <div class="scard"><span class="semoji">🪴</span><div><div class="sval" id="statPlants">0</div><div class="slbl">Plants</div></div></div>
+        <div class="scard"><span class="semoji">🔥</span><div><div class="sval accent" id="statStreak">0</div><div class="slbl">Streak days</div></div></div>
+        <div class="scard"><span class="semoji">📓</span><div><div class="sval" id="statLogs">0</div><div class="slbl">Total logs</div></div></div>
+      </div>
+      <div class="plants-grid" id="plantsGrid"></div>
+      <div class="empty-state" id="dashEmpty" style="display:none">
+        <div class="es-icon">🌱</div>
+        <h3>No plants yet</h3>
+        <p>Scan your first plant to start tracking its growth journey.</p>
+        <button class="btn-primary" onclick="showView('scan')">Scan your first plant</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ VIEW: SCAN ═══════════ -->
+  <div id="view-scan" class="view">
+    <div class="page-wrap narrow">
+      <a href="#" class="back-link" onclick="return showView('dashboard')">← Dashboard</a>
+      <h1 class="page-h1">Scan a Plant</h1>
+      <p class="page-sub">Upload a clear photo of your plant to identify it with AI.</p>
+
+      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+        <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileSelect(this)"/>
+        <div id="uploadPlaceholder" class="upload-placeholder">
+          <div class="upload-glyph">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2C6 2 3 8 3 14c0 4.4 3.6 8 9 8 2 0 4.5-.8 6-3 .8-1.2 1-2.5 1-4C19 8 16 2 12 2z" fill="#d0ead8"/>
+              <path d="M12 19V12M9 15l3-3 3 3" stroke="#7ab894" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="ul-label">Take or upload a plant photo</p>
+          <p class="ul-hint">Drag &amp; drop or click to browse</p>
+          <p class="ul-hint2">JPG, PNG, WebP — max 10 MB</p>
+        </div>
+        <div id="uploadPreview" style="display:none">
+          <img id="previewImg" src="" alt="Preview" class="preview-img"/>
+          <div class="preview-overlay">Change photo</div>
+        </div>
+      </div>
+
+      <div class="scan-tips" id="scanTips">
+        <p class="tips-ttl">📷 Tips for best results</p>
+        <ul>
+          <li>Center the plant clearly in frame</li>
+          <li>Use natural lighting when possible</li>
+          <li>Show the leaves as clearly as you can</li>
+        </ul>
+      </div>
+
+      <div id="scanError" class="form-error" style="display:none"></div>
+
+      <div class="scan-btns">
+        <button class="btn-primary btn-lg flex1" id="scanBtn" onclick="handleScan()">
+          <span id="scanBtnText">🔍 Identify Plant</span>
+          <span id="scanSpinner" class="bspinner" style="display:none"></span>
+        </button>
+        <button class="btn-ghost btn-lg" id="clearBtn" style="display:none" onclick="clearScan()">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ VIEW: IDENTIFY RESULT ═══════════ -->
+  <div id="view-identify" class="view">
+    <div class="page-wrap narrow">
+      <a href="#" class="back-link" onclick="return showView('scan')">← Try again</a>
+      <h1 class="page-h1">Identification</h1>
+      <p class="page-sub">Here's what our AI found.</p>
+      <div class="id-card">
+        <div class="id-img-wrap"><img id="idImg" src="" alt="Plant"/></div>
+        <div class="id-body">
+          <div class="id-row">
+            <div>
+              <h2 class="id-species" id="idName">—</h2>
+              <p class="id-common" id="idCommon"></p>
+            </div>
+            <div class="conf-badge" id="confBadge">—</div>
+          </div>
+          <div class="conf-track">
+            <div class="conf-fill" id="confFill" style="width:0%"></div>
+          </div>
+          <div id="idSuggestions" class="id-suggestions"></div>
+        </div>
+      </div>
+      <div class="id-actions">
+        <button class="btn-primary btn-lg btn-full" onclick="goToAddPlant()">✓ Save this plant</button>
+        <button class="btn-ghost btn-lg" onclick="showView('scan')">Try a different photo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ VIEW: ADD PLANT ═══════════ -->
+  <div id="view-add-plant" class="view">
+    <div class="page-wrap narrow">
+      <a href="#" class="back-link" onclick="return showView('identify')">← Identification</a>
+      <h1 class="page-h1">Add Plant</h1>
+      <p class="page-sub">Give your plant a name and fill in the details.</p>
+      <div class="ai-badge" id="aiBadge" style="display:none">
+        <span>🔬</span>
+        <div>
+          <div class="ai-badge-title">AI Identified</div>
+          <div class="ai-badge-sub" id="aiBadgeSub"></div>
+        </div>
+      </div>
+      <div id="addPlantError" class="form-error" style="display:none"></div>
+      <div class="ap-img-wrap" id="apImgWrap" style="display:none">
+        <img id="apImg" src="" alt="" class="ap-img"/>
+      </div>
+      <div class="form-group">
+        <label>Plant name *</label>
+        <input type="text" id="plantName" placeholder="e.g. My Monstera" class="finput"/>
+        <span class="ferr" id="plantNameErr"></span>
+      </div>
+      <div class="form-group">
+        <label>Species</label>
+        <input type="text" id="plantSpecies" placeholder="e.g. Monstera deliciosa" class="finput"/>
+      </div>
+      <div class="form-group">
+        <label>Notes</label>
+        <textarea id="plantDesc" placeholder="Where it lives, when you got it…" class="ftextarea" rows="3"></textarea>
+      </div>
+      <div class="form-row">
+        <button class="btn-primary btn-lg flex1" onclick="handleAddPlant()">
+          <span id="addPlantBtnTxt">Save Plant</span>
+          <span id="addPlantSpinner" class="bspinner" style="display:none"></span>
+        </button>
+        <button class="btn-ghost btn-lg" onclick="showView('dashboard')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ VIEW: PLANT PROFILE ═══════════ -->
+  <div id="view-plant" class="view">
+    <div class="page-wrap plant-layout">
+      <div class="plant-left">
+        <a href="#" class="back-link" onclick="return showView('dashboard')">← Dashboard</a>
+
+        <div class="pic">
+          <div class="pic-hero" id="picHero"></div>
+          <div class="pic-body">
+            <div class="pic-row">
+              <div>
+                <h1 class="pic-name" id="picName">—</h1>
+                <p class="pic-species italic" id="picSpecies"></p>
+              </div>
+              <div class="conf-badge sm" id="picConf" style="display:none"></div>
+            </div>
+            <p class="pic-desc" id="picDesc" style="display:none"></p>
+            <div class="pic-meta" id="picMeta"></div>
+          </div>
+        </div>
+
+        <div class="streak-widget">
+          <h3>Care Streak</h3>
+          <div class="sw-hero">
+            <div class="sw-emoji" id="swEmoji">💤</div>
+            <div>
+              <div class="sw-count"><span id="swCount">0</span> <small>days</small></div>
+              <div class="sw-lbl">current streak</div>
+            </div>
+          </div>
+          <div class="sw-prog-row">
+            <span id="swProgLbl">Progress to next milestone</span>
+            <span class="sw-frac" id="swFrac">0/7</span>
+          </div>
+          <div class="sw-track"><div class="sw-fill" id="swFill" style="width:0%"></div></div>
+          <div class="sw-stats">
+            <div class="sw-stat"><div class="sw-stat-val" id="swBest">0d</div><div class="sw-stat-lbl">Best streak</div></div>
+            <div class="sw-sep"></div>
+            <div class="sw-stat"><div class="sw-stat-val" id="swStatus">Start today!</div><div class="sw-stat-lbl">Status</div></div>
+          </div>
+        </div>
+
+        <div class="plant-btns">
+          <button class="btn-primary btn-full" onclick="showView('add-log')">📓 Add Today's Log</button>
+          <button class="btn-danger btn-full" onclick="handleDeletePlant()">Delete plant</button>
+        </div>
+      </div>
+
+      <div class="plant-right">
+        <div class="tab-bar">
+          <button class="tab active" onclick="switchTab('timeline',this)">Timeline</button>
+          <button class="tab" onclick="switchTab('growth',this)">Growth</button>
+          <button class="tab" onclick="switchTab('share',this)">Share</button>
+        </div>
+
+        <div class="tab-panel active" id="tab-timeline">
+          <div class="tab-head">
+            <h3>Growth Timeline</h3>
+            <button class="btn-secondary btn-sm" onclick="showView('add-log')">+ Log</button>
+          </div>
+          <div id="timelineContent"></div>
+          <div class="empty-state small" id="timelineEmpty" style="display:none">
+            <div class="es-icon small">📓</div><h3>No logs yet</h3><p>Add your first entry!</p>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-growth">
+          <div class="tab-head">
+            <h3>Growth Chart</h3>
+            <div id="growthStats" class="growth-stats"></div>
+          </div>
+          <div class="chart-box">
+            <canvas id="growthChart"></canvas>
+            <div class="chart-empty" id="chartEmpty">
+              <div style="font-size:2rem">📏</div>
+              <p>No height data yet.</p>
+              <small>Add a log with height to see your plant grow.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-share">
+          <h3 class="tab-h3">Share Progress</h3>
+          <div class="share-card" id="shareCardEl">
+            <div class="sc-top">
+              <div class="sc-plant-img" id="scImg">🌿</div>
+              <div class="sc-plant-info">
+                <div class="sc-plant-name" id="scName">—</div>
+                <div class="sc-plant-species" id="scSpecies">My plant</div>
+              </div>
+              <div class="sc-watermark">PlantScan</div>
+            </div>
+            <div class="sc-stats">
+              <div class="sc-s"><div class="sc-s-e">📏</div><div class="sc-s-v" id="scHeight">—</div><div class="sc-s-l">Height</div></div>
+              <div class="sc-s"><div class="sc-s-e">📈</div><div class="sc-s-v accent" id="scGrowth">—</div><div class="sc-s-l">Growth</div></div>
+              <div class="sc-s"><div class="sc-s-e">🔥</div><div class="sc-s-v" id="scStreak">0d</div><div class="sc-s-l">Streak</div></div>
+            </div>
+            <div class="sc-footer" id="scLogs">0 care logs recorded</div>
+          </div>
+          <div class="share-link-row" id="shareLinkRow" style="display:none">
+            <div class="share-link-url" id="shareLinkUrl"></div>
+            <button class="btn-secondary btn-sm" onclick="copyShareLink()">Copy</button>
+          </div>
+          <div class="share-btns">
+            <button class="btn-secondary btn-full" id="createShareBtn" onclick="createShareLink()">🌐 Create share link</button>
+            <button class="btn-ghost btn-full" onclick="downloadCard()">⬇ Download card</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ VIEW: ADD LOG ═══════════ -->
+  <div id="view-add-log" class="view">
+    <div class="page-wrap narrow">
+      <a href="#" class="back-link" onclick="return showView('plant')">← Back to plant</a>
+      <h1 class="page-h1">Daily Log</h1>
+      <p class="page-sub" id="addLogDate"></p>
+      <div id="addLogError" class="form-error" style="display:none"></div>
+      <div class="form-group">
+        <label>Height (cm)</label>
+        <input type="number" id="logHeight" placeholder="e.g. 24.5" step="0.1" min="0" class="finput"/>
+      </div>
+      <div class="form-group">
+        <label>Notes</label>
+        <textarea id="logNotes" placeholder="How does your plant look today? New leaves? Changed watering?" class="ftextarea" rows="4"></textarea>
+      </div>
+      <div class="streak-reminder">
+        <span>🔥</span><p>Logging today keeps your care streak alive!</p>
+      </div>
+      <div class="form-row">
+        <button class="btn-primary btn-lg flex1" onclick="handleAddLog()">
+          <span id="addLogBtnTxt">Save Log</span>
+          <span id="addLogSpinner" class="bspinner" style="display:none"></span>
+        </button>
+        <button class="btn-ghost btn-lg" onclick="showView('plant')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.2/chart.umd.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
