@@ -500,7 +500,13 @@ function renderDashboard() {
             </div>
           </div>
         ` : ''}
+function startApp() {
+  alert("Plant scanner starting 🌱");
+}
 
+function signup() {
+  alert("Signup coming soon!");
+}
         <div class="plants-grid stagger-2" id="plantsGrid">
           ${plants.map(p => plantCardHTML(p)).join('')}
 
